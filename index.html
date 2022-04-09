@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>CUSTOM ARRAY</h1>
+</body>
+</html>
+<script>
+//    create custom hindi array function
+let arr=new Array();
+
+function myArray(){
+    Object.defineProperty(this,"length",{
+        value:0,
+        writable:true,
+        enumerable:false, //dont cout this property
+    });
+    this.length=arguments.length;
+    for(let i=0;i<this.length;i++){
+        this[i]=arguments[i];
+    }
+}
+let a1=new myArray();
+myArray.prototype.PUSH=function(value){
+     let index=this.length;
+     this[index]=value; 
+     this.length++;
+}
+myArray.prototype.POP=function(){
+    let index=this.length-1;
+    delete this[index];
+    this.length--;
+
+}
+myArray.prototype.top=function(){
+    let index=this.length-1;
+    return this[index];
+}
+myArray.prototype.print=function(){
+    let bag="[";
+    for(let i=0;i<this.length-1;i++){
+        bag+=this[i]+",";
+    }
+    bag+=this[this.length-1]+"]";
+    console.log(bag);
+}
+myArray.prototype.printReverse=function(){
+    let bag="[";
+    for(let i=this.length-1;i>0;i--){
+        bag+=this[i]+",";
+    }
+    bag+=this[0]+"]";
+    console.log(bag);
+}
+myArray.prototype.size=function(){
+    return this.length;
+}
+a1.PUSH(1);
+a1.PUSH(2);
+a1.PUSH(3);
+a1.PUSH(4);
+a1.PUSH("X");
+var ele=a1.top();
+console.log(ele);
+a1.POP();
+a1.print();
+a1.printReverse();
+let l=a1.size();
+console.log(l);
+//console.log(a1,Object.values(a1));
+</script>
